@@ -120,6 +120,10 @@ a {
 	letter-spacing: var(--display-tracking);
 	line-height: var(--display-lh);
 	margin: 0;
+	/* A single long word (e.g. "CHALLENGES.") in a shrunk flex/grid
+	   item has nowhere to shrink to — let it break as a last resort
+	   instead of silently overflowing the viewport. */
+	overflow-wrap: break-word;
 }
 
 h1.display {
@@ -170,7 +174,9 @@ h3.display {
 	display: flex;
 	align-items: center;
 	gap: 1rem;
-	white-space: nowrap;
+	/* No white-space: nowrap — a longer label (e.g. a full date)
+	   needs to be free to wrap onto a second line on narrow
+	   viewports rather than force horizontal overflow. */
 }
 
 .label--ruled::before,
@@ -374,6 +380,12 @@ h3.display {
 	height: auto;
 }
 
+.route-map {
+	width: 100%;
+	height: auto;
+	border: 1px solid var(--rule);
+}
+
 /* ═══ IDENTITY B · signature graphic — the movement line ══════ */
 
 /* Thick, smooth, long-wavelength S-curve bleeding off both edges. */
@@ -543,6 +555,10 @@ h3.display {
 .stat {
 	padding: clamp(1.25rem, 2.5vw, 2rem) clamp(0.85rem, 1.5vw, 1.5rem);
 	border-left: 1px solid var(--rule);
+	/* Grid items default to min-width: auto, so a wide .stat__num
+	   (e.g. "177+") can force this past its 1fr track on narrow
+	   viewports and push the whole page into horizontal scroll. */
+	min-width: 0;
 }
 
 .stat:first-child {
@@ -986,6 +1002,15 @@ h3.display {
 		align-items: flex-start;
 		gap: 0.85rem;
 	}
+	/* Decorative only (aria-hidden) — dropped at narrow widths so a
+	   long headline word is never forced to compete with its
+	   min-width for space and overflow the viewport. */
+	.streaks {
+		display: none;
+	}
+	.streakline > * {
+		min-width: 0;
+	}
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1050,7 +1075,7 @@ h3.display {
 /* ── Co-brand credit (HMC × LIFTR on URU GAMES pages) ───────── */
 .cobrand {
 	display: flex;
-	align-items: baseline;
+	align-items: center;
 	gap: 0.85rem;
 	margin-bottom: 1.75rem;
 }
@@ -1060,16 +1085,13 @@ h3.display {
 	font-size: 0.75rem;
 }
 
-.cobrand__liftr {
-	font-family: var(--body);
-	font-weight: 800;
-	font-style: italic;
-	font-size: 0.9375rem;
-	letter-spacing: 0.02em;
-	/* Lightened from LIFTR's #d0242a — that reads fine on the old
-	   cream .uru background but drops to ~3:1 contrast (fails AA)
-	   against the new Deep Ink one. */
-	color: #f15a60;
+.cobrand__logo {
+	height: 1rem;
+	width: auto;
+}
+
+.cobrand__logo--liftr {
+	height: 0.8125rem;
 }
 
 /* ── Registration band index + tag badges ──────────────────── */
@@ -1119,7 +1141,9 @@ h3.display {
 /* ── Event cards (Events index page) ────────────────────────── */
 .event-cards {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	/* min(300px, 100%) — same 300px floor on normal screens, but
+	   never wider than the container itself on very narrow ones. */
+	grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
 	border-top: 1px solid var(--rule);
 	border-left: 1px solid var(--rule);
 }
@@ -1131,6 +1155,9 @@ h3.display {
 	display: flex;
 	flex-direction: column;
 	gap: 1.1rem;
+	/* Grid items default to a content-based min-width, which can
+	   override the track's own minmax() on very narrow viewports. */
+	min-width: 0;
 }
 
 .event-card__meta {
@@ -1334,4 +1361,18 @@ body.uru-gate-active {
 		animation: none !important;
 		transition: none !important;
 	}
+}
+
+/* ── Scroll reveal (reveal.js) ────────────────────────────────
+   Opacity only — deliberately never touches transform, so it
+   can't fight with parallax.js's own transform on the same
+   heading elements. reveal.js itself no-ops under reduced
+   motion, so no matching override is needed here. ── */
+.reveal {
+	opacity: 0;
+	transition: opacity 0.7s ease;
+}
+
+.reveal.is-visible {
+	opacity: 1;
 }

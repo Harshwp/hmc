@@ -46,11 +46,11 @@
 		setTimeout(function () {
 			gate.classList.add("is-fading");
 			document.body.classList.remove("uru-gate-active");
-		}, 900);
+		}, 2200);
 
 		setTimeout(function () {
 			gate.style.display = "none";
-		}, 1500);
+		}, 2800);
 	}
 
 	choices.forEach(function (btn) {
