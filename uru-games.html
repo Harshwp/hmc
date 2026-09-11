@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>URU GAMES — A hybrid endurance event | Hybrid Miles Club</title>
+		<meta
+			name="description"
+			content="URU GAMES: a hybrid endurance event. Sunday 25 October 2026 at Agara Lake, HSR Layout, Bangalore. A lakeside run, functional movement stations, a farmer carry and a burpee finish — chip-timed start to finish."
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Anton&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="styles.css" />
+	</head>
+	<body>
+		<a class="skip" href="#main">Skip to content</a>
+
+		<!-- ══ ENTRY GATE — Namma Bengaluru access check ══════════
+		     Local-trivia unlock, gating the URU Games reveal.
+		     Persists per browser tab via sessionStorage, so it
+		     only asks once per session, not on every reload.
+		     ═══════════════════════════════════════════════════ -->
+		<div class="uru-gate" id="uru-gate" role="dialog" aria-modal="true" aria-labelledby="uru-gate-title">
+			<div class="uru-gate__panel">
+				<h2 id="uru-gate-title" class="uru-gate__title">
+					Namma Bengaluru<br />access check ⚡
+				</h2>
+				<p class="uru-gate__prompt">
+					Solve the 5-second local riddle to unlock URU Games 2026:
+				</p>
+				<p class="uru-gate__riddle">
+					"I border HSR, my track runs wide,<br />
+					where runners sweat right by the water's side.<br />
+					What am I?"
+				</p>
+				<div class="uru-gate__choices">
+					<button type="button" class="uru-gate__choice" data-correct="false">A · Cubbon Park</button>
+					<button type="button" class="uru-gate__choice" data-correct="true">B · Agara Lake</button>
+					<button type="button" class="uru-gate__choice" data-correct="false">C · Lalbagh</button>
+				</div>
+				<p class="uru-gate__feedback" id="uru-gate-feedback" aria-live="polite"></p>
+				<p class="uru-gate__result" id="uru-gate-result" hidden>
+					Boom. You're in!<br />Welcome to URU Games 2026.
+				</p>
+			</div>
+		</div>
+		<script>
+			if (sessionStorage.getItem("uruGateUnlocked") === "1") {
+				document.getElementById("uru-gate").style.display = "none";
+			} else {
+				document.body.classList.add("uru-gate-active");
+			}
+		</script>
+
+		<header class="site-head">
+			<div class="site-head__inner">
+				<a class="brandmark" href="index.html"
+					><img src="hmc-mark-white.svg" alt="Hybrid Miles Club"
+				/></a>
+				<nav class="nav" aria-label="Primary">
+					<a href="index.html">Home</a>
+					<a href="events.html" aria-current="page">Events</a>
+					<a href="club.html">The Club</a>
+					<a href="contact.html">Contact</a>
+				</nav>
+			</div>
+		</header>
+
+		<main id="main">
+			<!-- ══════════════════════════════════════════════════════
+			     IDENTITY B · URU GAMES — the whole page.
+			     Near-black HMC ends at the header; everything from
+			     here down is Deep Ink / Warm Cream / URU Pink.
+			     ══════════════════════════════════════════════════════ -->
+			<div class="uru">
+				<section class="section" style="padding-bottom: 0">
+					<div class="wrap">
+						<p style="margin: 0">
+							<a class="textlink textlink--quiet" href="events.html"
+								>← Back to Events</a
+							>
+						</p>
+					</div>
+				</section>
+
+				<hr class="movement" data-parallax="flow" />
+
+				<!-- ── Event details ──────────────────────────────── -->
+				<section class="section" style="padding-top: clamp(0.75rem, 2vw, 1.5rem)">
+					<div class="wrap">
+						<div class="cobrand">
+							<span class="label">Co-produced by</span>
+							<span class="cobrand__liftr">HMC</span>
+							<span class="cobrand__x">×</span>
+							<span class="cobrand__liftr">LIFTR</span>
+						</div>
+
+						<div class="hero__meta">
+							<p class="label label--accent">Bengaluru 2026</p>
+							<p class="label">People · Movement · Community</p>
+						</div>
+
+						<h1 class="display">
+								<img
+									class="uru-logo"
+									src="uru-games-logo-cream.png"
+									alt="URU Games"
+								/>
+							</h1>
+
+						<p
+							class="lede"
+							style="
+								margin-top: clamp(1.5rem, 3vw, 2.25rem);
+								font-weight: 400;
+								max-width: 30ch;
+							"
+						>
+							A hybrid endurance event.
+						</p>
+
+						<div class="split mt-l">
+							<h2 class="display">Not your average<br />hybrid race.</h2>
+							<div class="prose">
+								<p>
+									Boom. You made it to URU Games.
+								</p>
+								<p>
+									Look — if you think we're just another group of everyday
+									people messing around with a hybrid race format... you're
+									probably right. And we wear that proudly.
+								</p>
+								<p>
+									No serious-faced egos here — just an outdoor hybrid
+									playground forged out of pure love, raw grit, and local
+									spirit. Welcome to our world.
+								</p>
+							</div>
+						</div>
+
+						<dl class="facts mt-l">
+							<div class="fact">
+								<dt class="label">Date</dt>
+								<dd class="fact__val fact__val--big">
+									Sunday, 25 October 2026
+								</dd>
+							</div>
+							<div class="fact">
+								<dt class="label">Venue</dt>
+								<dd class="fact__val fact__val--big">
+									Agara Lake, HSR Layout, Bangalore
+								</dd>
+							</div>
+							<div class="fact">
+								<dt class="label">Format</dt>
+								<dd class="fact__val">
+									A 400 m lake run into functional movement stations, a heavy
+									farmer carry, and a 30-burpee finish.
+								</dd>
+							</div>
+							<div class="fact">
+								<dt class="label">Timing</dt>
+								<dd class="fact__val">Chip-timed, start to finish.</dd>
+							</div>
+						</dl>
+
+						<div class="stats mt-l">
+							<div class="stat">
+								<span class="stat__num">177</span>
+								<p class="label">Athletes to date</p>
+							</div>
+							<div class="stat">
+								<span class="stat__num">2</span>
+								<p class="label">Events delivered</p>
+							</div>
+							<div class="stat">
+								<span class="stat__num">0</span>
+								<p class="label">Dropouts</p>
+							</div>
+							<div class="stat">
+								<span class="stat__num">2</span>
+								<p class="label">Categories</p>
+							</div>
+						</div>
+
+						<div class="split mt-l">
+							<h3 class="display">Bangalore's<br />first</h3>
+							<div class="prose">
+								<p>
+									URU GAMES is Bangalore's first hybrid fitness race at Agara
+									Lake — a lakeside run into a circuit of functional movement
+									stations, a heavy farmer carry, and a thirty-burpee finish,
+									chip-timed start to finish.
+								</p>
+								<p>
+									You start by the water. You hit the stations with your heart
+									rate already up. You carry the load, you finish the burpees,
+									and you're done — chip time posted the moment you cross.
+								</p>
+							</div>
+						</div>
+
+						<!-- The playground circuit, four steps -->
+						<div class="mt-l">
+							<div class="eyebrow">
+								<span class="eyebrow__num">01</span>
+								<p class="label">The playground circuit</p>
+							</div>
+
+							<div class="steps">
+								<div class="step">
+									<span class="step__num">01</span>
+									<h4 class="step__name">Lake Run</h4>
+									<p class="step__body">
+										400 m along Agara Lake to get the legs moving and the pace
+										set.
+									</p>
+								</div>
+								<div class="step">
+									<span class="step__num">02</span>
+									<h4 class="step__name">Movement Stations</h4>
+									<p class="step__body">
+										Wall balls, box step-ups and kettlebell swings — three
+										functional stations, back to back.
+									</p>
+								</div>
+								<div class="step">
+									<span class="step__num">03</span>
+									<h4 class="step__name">Farmer Carry</h4>
+									<p class="step__body">
+										Heavy carry, no shortcuts. Pick up the load and own your
+										space.
+									</p>
+								</div>
+								<div class="step">
+									<span class="step__num">04</span>
+									<h4 class="step__name">Burpee Finish</h4>
+									<p class="step__body">
+										Thirty burpees and you're done — high-fives at the line.
+									</p>
+								</div>
+							</div>
+
+							<p class="note">
+								Built for every age group, body type and fitness level. Whether
+								you're eighteen or sixty, a seasoned athlete or taking on your
+								first event — if you can move, you belong here.
+							</p>
+						</div>
+					</div>
+				</section>
+
+				<!-- ══ FOUR REGISTRATION BANDS ═════════════════════
+				     Each divided from the next by the movement line.
+				     All four currently share one Cashfree payment
+				     form (code=urugames_openmen) — swap in per-
+				     category checkout links here once they exist.
+				     ═══════════════════════════════════════════════ -->
+				<hr class="movement" data-parallax="flow" />
+
+				<section class="band" id="beginner-male">
+					<div class="wrap band__inner">
+						<div>
+							<div class="band__head">
+								<span class="band__index">01</span>
+								<h3 class="display">Beginner<br />Male</h3>
+							</div>
+						</div>
+						<div>
+							<p class="band__detail">
+								400 m lake run <span>·</span> Wall balls, box step-ups,
+								kettlebell swings <span>·</span> Heavy farmer carry
+								<span>·</span> 30 burpees to finish
+							</p>
+							<div class="band__tags">
+								<span class="tag">Beginner</span>
+								<span class="tag">Male</span>
+								<span class="tag">Chip-timed</span>
+							</div>
+						</div>
+						<a
+							class="btn"
+							href="https://payments.cashfree.com/forms?code=urugames_openmen"
+							target="_blank"
+							rel="noopener"
+							>Register</a
+						>
+					</div>
+				</section>
+
+				<hr class="movement" data-parallax="flow" />
+
+				<section class="band" id="beginner-female">
+					<div class="wrap band__inner">
+						<div>
+							<div class="band__head">
+								<span class="band__index">02</span>
+								<h3 class="display">Beginner<br />Female</h3>
+							</div>
+						</div>
+						<div>
+							<p class="band__detail">
+								400 m lake run <span>·</span> Wall balls, box step-ups,
+								kettlebell swings <span>·</span> Heavy farmer carry
+								<span>·</span> 30 burpees to finish
+							</p>
+							<div class="band__tags">
+								<span class="tag">Beginner</span>
+								<span class="tag">Female</span>
+								<span class="tag">Chip-timed</span>
+							</div>
+						</div>
+						<a
+							class="btn"
+							href="https://payments.cashfree.com/forms?code=urugames_openmen"
+							target="_blank"
+							rel="noopener"
+							>Register</a
+						>
+					</div>
+				</section>
+
+				<hr class="movement" data-parallax="flow" />
+
+				<section class="band" id="elite-male">
+					<div class="wrap band__inner">
+						<div>
+							<div class="band__head">
+								<span class="band__index">03</span>
+								<h3 class="display">Elite<br />Male</h3>
+							</div>
+						</div>
+						<div>
+							<p class="band__detail">
+								400 m lake run <span>·</span> Wall balls, box step-ups,
+								kettlebell swings <span>·</span> Heavy farmer carry
+								<span>·</span> 30 burpees to finish
+							</p>
+							<div class="band__tags">
+								<span class="tag">Elite</span>
+								<span class="tag">Male</span>
+								<span class="tag">Chip-timed</span>
+							</div>
+						</div>
+						<a
+							class="btn"
+							href="https://payments.cashfree.com/forms?code=urugames_openmen"
+							target="_blank"
+							rel="noopener"
+							>Register</a
+						>
+					</div>
+				</section>
+
+				<hr class="movement" data-parallax="flow" />
+
+				<section class="band" id="elite-female">
+					<div class="wrap band__inner">
+						<div>
+							<div class="band__head">
+								<span class="band__index">04</span>
+								<h3 class="display">Elite<br />Female</h3>
+							</div>
+						</div>
+						<div>
+							<p class="band__detail">
+								400 m lake run <span>·</span> Wall balls, box step-ups,
+								kettlebell swings <span>·</span> Heavy farmer carry
+								<span>·</span> 30 burpees to finish
+							</p>
+							<div class="band__tags">
+								<span class="tag">Elite</span>
+								<span class="tag">Female</span>
+								<span class="tag">Chip-timed</span>
+							</div>
+						</div>
+						<a
+							class="btn"
+							href="https://payments.cashfree.com/forms?code=urugames_openmen"
+							target="_blank"
+							rel="noopener"
+							>Register</a
+						>
+					</div>
+				</section>
+
+				<hr class="movement" data-parallax="flow" />
+
+				<section class="band" style="padding-bottom: 0">
+					<div class="wrap">
+						<p class="note" style="margin-top: 0">
+							Every registration opens a short athlete form followed by online
+							payment. You will land on a confirmation page as soon as payment
+							clears, and your confirmation email follows immediately.
+						</p>
+					</div>
+				</section>
+			</div>
+		</main>
+
+		<footer class="site-foot">
+			<div class="wrap site-foot__inner">
+				<div>
+					<p class="label">Hybrid Miles Club</p>
+					<address>
+						#387, 17th C Main, 15th Cross<br />
+						4th Sector, HSR Layout<br />
+						Bangalore 560102
+					</address>
+				</div>
+				<div>
+					<p class="label">Contact</p>
+					<address>
+						Ramesh Babu<br />
+						<a class="textlink" href="mailto:hybridmilesclub@gmail.com"
+							>hybridmilesclub@gmail.com</a
+						><br />
+						<a class="textlink" href="tel:+919945455559">+91 99454 55559</a>
+					</address>
+				</div>
+				<div>
+					<p class="label">Follow</p>
+					<address>
+						<a
+							class="textlink"
+							href="https://www.instagram.com/hybrid_miles_club/"
+							rel="noopener"
+							>@hybrid_miles_club</a
+						>
+					</address>
+				</div>
+				<p class="label label--ruled">Run. Lift. Repeat.</p>
+			</div>
+		</footer>
+		<script src="uru-gate.js" defer></script>
+		<script src="parallax.js" defer></script>
+	</body>
+</html>

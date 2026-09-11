@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="robots" content="noindex, nofollow" />
+		<title>You're in — URU GAMES</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Anton&display=swap" rel="stylesheet" />
+		<link rel="stylesheet" href="styles.css" />
+	</head>
+	<!-- IDENTITY B · URU GAMES.
+	     Hidden page — reachable only by redirect after successful
+	     payment. Never add to the primary navigation.
+	     Category is read from ?cat=beginner-male | beginner-female
+	     | elite-male | elite-female, with a neutral fallback. -->
+	<body class="uru">
+		<a class="skip" href="#main">Skip to content</a>
+
+		<header class="site-head site-head--uru">
+			<div class="site-head__inner">
+				<a class="brandmark" href="index.html"
+					><img src="hmc-mark-white.svg" alt="Hybrid Miles Club"
+				/></a>
+				<p class="label">Registration confirmed</p>
+			</div>
+		</header>
+
+		<main id="main">
+			<section class="section" style="padding-bottom: 0">
+				<div class="wrap">
+					<div class="hero__meta">
+						<p class="label label--accent">URU Games</p>
+						<p class="label">Sunday · 25 October 2026</p>
+					</div>
+
+					<h1 class="display">You're<br />in.</h1>
+				</div>
+			</section>
+
+			<!-- The movement line sweeping beneath the headline -->
+			<hr class="movement" data-parallax="flow" />
+
+			<section class="section" style="padding-top: clamp(0.75rem, 2vw, 1.5rem)">
+				<div class="wrap">
+					<p class="lede" style="max-width: 46ch">
+						Your place at URU GAMES is confirmed —
+						<strong id="cat-line">in your selected category</strong>. A
+						confirmation email is on its way to you now.
+					</p>
+
+					<div class="hero__foot">
+						<button class="btn" type="button" id="add-to-calendar">
+							Add to calendar
+						</button>
+						<a
+							class="textlink"
+							href="https://www.instagram.com/hybrid_miles_club/"
+							rel="noopener"
+							>Follow @hybrid_miles_club</a
+						>
+					</div>
+				</div>
+			</section>
+
+			<section class="section" style="padding-top: 0">
+				<div class="wrap">
+					<div class="eyebrow">
+						<span class="eyebrow__num">01</span>
+						<p class="label">What happens next</p>
+					</div>
+
+					<ol class="next">
+						<li>
+							<div>
+								<h3>Confirmation email</h3>
+								<p>Landing in your inbox now, with your registration details and payment receipt. If you cannot see it, check your spam folder before you worry.</p>
+							</div>
+						</li>
+						<li>
+							<div>
+								<h3>Race brief</h3>
+								<p>Closer to the date we will email you the full race brief — the course map, the movement standards for each zone, and what to bring.</p>
+							</div>
+						</li>
+						<li>
+							<div>
+								<h3>Reporting time</h3>
+								<p>Your reporting time at Agara Lake comes in the same email. Wave times are set once registration closes.</p>
+							</div>
+						</li>
+						<li>
+							<div>
+								<h3>Turn up and race</h3>
+								<p>Sunday, 25 October 2026. Agara Lake, HSR Layout, Bangalore.</p>
+							</div>
+						</li>
+					</ol>
+
+					<p style="margin-top: clamp(1.5rem, 3vw, 2.25rem)">
+						<a class="textlink textlink--quiet" href="uru-games.html"
+							>Back to the event</a
+						>
+					</p>
+				</div>
+			</section>
+		</main>
+
+		<footer class="site-foot">
+			<div class="wrap site-foot__inner">
+				<div>
+					<p class="label">URU Games</p>
+					<address>
+						Agara Lake, HSR Layout<br />
+						Bangalore · 25 October 2026
+					</address>
+				</div>
+				<div>
+					<p class="label">Organised by</p>
+					<address>
+						Hybrid Miles Club<br />
+						<a class="textlink" href="mailto:hybridmilesclub@gmail.com"
+							>hybridmilesclub@gmail.com</a
+						><br />
+						<a class="textlink" href="tel:+919945455559">+91 99454 55559</a>
+					</address>
+				</div>
+				<p class="label label--ruled">A stronger Bengaluru</p>
+			</div>
+		</footer>
+
+		<script>
+			(function () {
+				"use strict";
+
+				var LABELS = {
+					"beginner-male": "Beginner, Male",
+					"beginner-female": "Beginner, Female",
+					"elite-male": "Elite, Male",
+					"elite-female": "Elite, Female"
+				};
+
+				var cat = new URLSearchParams(window.location.search).get("cat");
+				if (cat && LABELS[cat.toLowerCase()]) {
+					document.getElementById("cat-line").textContent =
+						LABELS[cat.toLowerCase()];
+				}
+
+				var ICS = [
+					"BEGIN:VCALENDAR",
+					"VERSION:2.0",
+					"PRODID:-//Hybrid Miles Club//URU GAMES//EN",
+					"CALSCALE:GREGORIAN",
+					"METHOD:PUBLISH",
+					"BEGIN:VEVENT",
+					"UID:uru-games-2026@hybrid_miles_club",
+					"DTSTAMP:20260101T000000Z",
+					"DTSTART;VALUE=DATE:20261025",
+					"DTEND;VALUE=DATE:20261026",
+					"SUMMARY:URU GAMES - A hybrid endurance event",
+					"DESCRIPTION:Full race brief and reporting time will be emailed closer to the date.",
+					"LOCATION:Agara Lake\\, HSR Layout\\, Bangalore 560102",
+					"BEGIN:VALARM",
+					"TRIGGER:-P1D",
+					"ACTION:DISPLAY",
+					"DESCRIPTION:URU GAMES tomorrow",
+					"END:VALARM",
+					"END:VEVENT",
+					"END:VCALENDAR"
+				].join("\r\n");
+
+				document
+					.getElementById("add-to-calendar")
+					.addEventListener("click", function () {
+						var url = URL.createObjectURL(
+							new Blob([ICS], { type: "text/calendar;charset=utf-8" })
+						);
+						var a = document.createElement("a");
+						a.href = url;
+						a.download = "uru-games-2026.ics";
+						document.body.appendChild(a);
+						a.click();
+						document.body.removeChild(a);
+						URL.revokeObjectURL(url);
+					});
+			})();
+		</script>
+			<script src="parallax.js" defer></script>
+	</body>
+</html>

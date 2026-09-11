@@ -1,0 +1,1337 @@
+/* ═══════════════════════════════════════════════════════════════
+   HYBRID MILES CLUB — two distinct identities, never blended.
+
+   IDENTITY A · HMC   — :root defaults. Strictly monochrome.
+                        Archivo geometric caps. Nested hairlines.
+   IDENTITY B · URU   — .uru scope. Cream / Deep Ink / URU Pink.
+                        Anton. Thick pink movement line.
+
+   .uru is a *section-level* scope, so the Events page can hard-cut
+   from one identity into the other without blending tokens.
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+	/* ── Identity A — HMC. Monochrome only. No accent hue. ── */
+	--ground: #0b0d0f;
+	--text: #ffffff;
+	--muted: #a8adb2;
+	--accent: var(--text); /* HMC has no colour: accent === text */
+
+	--rule: rgba(255, 255, 255, 0.16);
+	--rule-mid: rgba(255, 255, 255, 0.26);
+	--rule-strong: rgba(255, 255, 255, 0.42);
+
+	--display: "Archivo", -apple-system, "Helvetica Neue", sans-serif;
+	--body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+	--label-font: "Archivo", -apple-system, sans-serif;
+
+	--display-weight: 600;
+	--display-tracking: 0.015em;
+	--display-lh: 1.02;
+
+	--h1: clamp(2.6rem, 6.5vw, 5.75rem);
+	--h2: clamp(1.9rem, 4vw, 3.5rem);
+	--h3: clamp(1.15rem, 1.9vw, 1.6rem);
+
+	--gutter: clamp(1.25rem, 4vw, 4rem);
+	--max: 1320px;
+}
+
+/* ── Identity A, inverted band — white ground, near-black text ── */
+.invert {
+	--ground: #ffffff;
+	--text: #0b0d0f;
+	--muted: #5b6166;
+	--rule: rgba(11, 13, 15, 0.16);
+	--rule-mid: rgba(11, 13, 15, 0.26);
+	--rule-strong: rgba(11, 13, 15, 0.42);
+	background: var(--ground);
+	color: var(--text);
+}
+
+/* ── Identity B — URU GAMES ─────────────────────────────────── */
+/* Dark treatment, matching the sponsorship prospectus: Deep Ink
+   ground with Warm Cream text — the inverse of the light card
+   the brand guidelines showed. Same three brand colours either
+   way, just flipped. */
+.uru {
+	--ground: #17232d; /* Deep Ink */
+	--text: #f3ebdd; /* Warm Cream */
+	--muted: rgba(243, 235, 221, 0.62);
+	--accent: #d94f70; /* URU Pink */
+
+	--rule: rgba(243, 235, 221, 0.18);
+	--rule-mid: rgba(243, 235, 221, 0.28);
+	--rule-strong: rgba(243, 235, 221, 0.42);
+
+	--display: "Anton", "Arial Narrow", Impact, sans-serif;
+	--display-weight: 400;
+	--display-tracking: 0.01em;
+	--display-lh: 0.86;
+
+	--h1: clamp(3.25rem, 11vw, 9rem);
+	--h2: clamp(2.4rem, 7vw, 5.5rem);
+	--h3: clamp(1.3rem, 2.4vw, 2rem);
+
+	background: var(--ground);
+	color: var(--text);
+}
+
+/* ── Reset ──────────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	border-radius: 0;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+	scroll-behavior: smooth;
+}
+
+body {
+	margin: 0;
+	background: var(--ground);
+	color: var(--text);
+	font-family: var(--body);
+	font-size: 1rem;
+	line-height: 1.68;
+	-webkit-font-smoothing: antialiased;
+	font-feature-settings: "tnum" 1;
+}
+
+img {
+	max-width: 100%;
+	display: block;
+}
+
+a {
+	color: inherit;
+}
+
+/* ── Type ───────────────────────────────────────────────────── */
+
+.display {
+	font-family: var(--display);
+	font-weight: var(--display-weight);
+	text-transform: uppercase;
+	letter-spacing: var(--display-tracking);
+	line-height: var(--display-lh);
+	margin: 0;
+}
+
+h1.display {
+	font-size: var(--h1);
+}
+h2.display {
+	font-size: var(--h2);
+	/* Same fix as h3 below: in a narrow .split column, h2 can wrap to
+	   3 lines too (e.g. "Not your average / hybrid race." on URU
+	   Games) — 0.86 is too tight once that happens. */
+	line-height: 1.05;
+}
+h3.display {
+	font-size: var(--h3);
+	/* --display-lh (0.86 in .uru) is tuned for single huge hero lines —
+	   too tight for h3's smaller, more often multi-line headings, where
+	   Anton's tall caps overflow the line box and overlap the next line. */
+	line-height: 1.05;
+}
+
+/* Small labels — same face, light weight, very wide tracking. */
+.label {
+	font-family: var(--label-font);
+	font-size: 0.6875rem;
+	font-weight: 300;
+	text-transform: uppercase;
+	letter-spacing: 0.3em;
+	line-height: 1.4;
+	color: var(--muted);
+	margin: 0;
+}
+
+.uru .label {
+	font-weight: 500;
+	letter-spacing: 0.22em;
+}
+
+.label--strong {
+	color: var(--text);
+}
+
+.uru .label--accent {
+	color: var(--accent);
+}
+
+/* "— CLUB —" : a label with a hairline either side, as in the logo. */
+.label--ruled {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	white-space: nowrap;
+}
+
+.label--ruled::before,
+.label--ruled::after {
+	content: "";
+	height: 1px;
+	background: var(--rule-mid);
+	flex: 1 1 auto;
+	min-width: 1.5rem;
+}
+
+.lede {
+	font-size: clamp(1.0625rem, 1.7vw, 1.375rem);
+	line-height: 1.55;
+	max-width: 38ch;
+	margin: 0;
+	font-weight: 300;
+	color: var(--text);
+}
+
+.prose {
+	max-width: 60ch;
+	color: var(--muted);
+}
+
+.prose p + p {
+	margin-top: 1.15em;
+}
+
+.prose strong {
+	color: var(--text);
+	font-weight: 500;
+}
+
+/* ── Layout ─────────────────────────────────────────────────── */
+
+.wrap {
+	max-width: var(--max);
+	margin: 0 auto;
+	padding-inline: var(--gutter);
+}
+
+.section {
+	padding-block: clamp(2rem, 4.5vw, 3.75rem);
+	background: var(--ground);
+	color: var(--text);
+}
+
+.split {
+	display: grid;
+	grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+	gap: clamp(1.5rem, 4vw, 3rem);
+	align-items: start;
+}
+
+.eyebrow {
+	display: flex;
+	align-items: baseline;
+	gap: 1.25rem;
+	margin: 0 0 1.5rem;
+	padding-bottom: 0.75rem;
+	border-bottom: 1px solid var(--rule);
+}
+
+.eyebrow__num {
+	font-family: var(--label-font);
+	font-weight: 600;
+	font-size: 0.75rem;
+	letter-spacing: 0.1em;
+	color: var(--text);
+}
+
+.uru .eyebrow__num {
+	color: var(--accent);
+}
+
+/* ═══ IDENTITY A · signature graphic — nested hairlines ═══════ */
+
+/* Sets of 3–5 tightly spaced hairlines, used as dividers. */
+.rules {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	margin: 0;
+	border: 0;
+}
+
+.rules i {
+	display: block;
+	height: 1px;
+	background: var(--rule);
+}
+
+.rules i:nth-child(2) {
+	background: var(--rule-mid);
+}
+.rules i:nth-child(3) {
+	background: var(--rule-strong);
+}
+.rules i:nth-child(4) {
+	background: var(--rule-mid);
+}
+.rules i:nth-child(5) {
+	background: var(--rule);
+}
+
+.rules--divide {
+	margin-block: clamp(1.5rem, 3.5vw, 2.75rem);
+}
+
+/* Speed streaks — hairlines trailing off the end of a headline. */
+.streakline {
+	display: flex;
+	align-items: center;
+	gap: clamp(0.75rem, 2vw, 1.5rem);
+}
+
+.streaks {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	flex: 1 1 auto;
+	min-width: 3rem;
+	padding-top: 0.35em;
+}
+
+.streaks i {
+	display: block;
+	height: 1px;
+	background: var(--rule-mid);
+}
+
+.streaks i:nth-child(1) {
+	width: 100%;
+}
+.streaks i:nth-child(2) {
+	width: 78%;
+}
+.streaks i:nth-child(3) {
+	width: 92%;
+}
+.streaks i:nth-child(4) {
+	width: 56%;
+}
+
+/* Track-bend motif — nested lanes, very low opacity, behind heroes. */
+.hero {
+	position: relative;
+	overflow: hidden;
+	background: var(--ground);
+	color: var(--text);
+	min-height: min(70vh, 620px);
+	display: flex;
+	align-items: center;
+	padding-block: clamp(2.5rem, 5vw, 4rem);
+}
+
+.hero__bend {
+	position: absolute;
+	inset: 0 auto 0 0;
+	width: min(120%, 1500px);
+	background-image: url("track-bend.svg");
+	background-repeat: no-repeat;
+	background-position: left center;
+	background-size: auto 118%;
+	opacity: 0.16;
+	pointer-events: none;
+}
+
+.hero__inner {
+	position: relative;
+	width: 100%;
+}
+
+.hero__meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1.25rem;
+	margin-bottom: clamp(1.25rem, 3vw, 2rem);
+}
+
+.hero__foot {
+	margin-top: clamp(1.5rem, 3.5vw, 2.5rem);
+	padding-top: 1.25rem;
+	border-top: 1px solid var(--rule);
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1.25rem;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.hero__logo {
+	height: clamp(56px, 9vw, 116px);
+	width: auto;
+	margin-bottom: clamp(1rem, 2.5vw, 1.75rem);
+}
+
+.uru-logo {
+	width: clamp(220px, 26vw, 340px);
+	height: auto;
+}
+
+/* ═══ IDENTITY B · signature graphic — the movement line ══════ */
+
+/* Thick, smooth, long-wavelength S-curve bleeding off both edges. */
+.movement {
+	display: block;
+	width: 100%;
+	height: clamp(58px, 8vw, 118px);
+	border: 0;
+	margin: 0;
+	background-image: url("movement-line.svg");
+	background-repeat: repeat-x;
+	background-position: center;
+	background-size: auto 100%;
+}
+
+/* The hard cut from HMC into URU. */
+.cut {
+	background: var(--ground);
+}
+
+/* ── Buttons & links ────────────────────────────────────────── */
+
+.btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.75rem;
+	font-family: var(--label-font);
+	font-size: 0.75rem;
+	font-weight: 500;
+	text-transform: uppercase;
+	letter-spacing: 0.2em;
+	text-decoration: none;
+	padding: 1.15rem 2.25rem;
+	border: 1px solid var(--text);
+	background: transparent;
+	color: var(--text);
+	cursor: pointer;
+	transition: background 0.15s linear, color 0.15s linear;
+}
+
+.btn:hover,
+.btn:focus-visible {
+	background: var(--text);
+	color: var(--ground);
+}
+
+/* URU buttons are solid pink. */
+.uru .btn {
+	font-family: var(--body);
+	font-weight: 700;
+	border-color: var(--accent);
+	background: var(--accent);
+	color: #fff;
+}
+
+.uru .btn:hover,
+.uru .btn:focus-visible {
+	background: transparent;
+	color: var(--accent);
+}
+
+.btn--block {
+	width: 100%;
+}
+
+.textlink {
+	color: var(--text);
+	text-decoration: none;
+	border-bottom: 1px solid var(--rule-strong);
+	padding-bottom: 1px;
+	transition: border-color 0.15s linear;
+}
+
+.textlink:hover,
+.textlink:focus-visible {
+	border-bottom-color: var(--text);
+}
+
+.uru .textlink {
+	border-bottom-color: var(--accent);
+}
+
+.textlink--quiet {
+	font-family: var(--label-font);
+	font-size: 0.6875rem;
+	font-weight: 300;
+	text-transform: uppercase;
+	letter-spacing: 0.24em;
+	color: var(--muted);
+}
+
+/* ── Header ─────────────────────────────────────────────────── */
+
+.site-head {
+	position: sticky;
+	top: 0;
+	z-index: 60;
+	background: #0b0d0f;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.site-head__inner {
+	max-width: var(--max);
+	margin: 0 auto;
+	padding: 1rem var(--gutter);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	row-gap: 0.75rem;
+	gap: 2rem;
+}
+
+.site-head__cta {
+	white-space: nowrap;
+}
+
+.brandmark {
+	display: block;
+	text-decoration: none;
+	flex: 0 0 auto;
+}
+
+.brandmark img {
+	display: block;
+	height: clamp(30px, 3.6vw, 42px);
+	width: auto;
+}
+
+.nav {
+	display: flex;
+	gap: clamp(0.9rem, 2.1vw, 2.1rem);
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.nav a {
+	font-family: var(--label-font);
+	font-size: 0.6875rem;
+	font-weight: 300;
+	text-transform: uppercase;
+	letter-spacing: 0.22em;
+	text-decoration: none;
+	color: #a8adb2;
+	padding-block: 0.3rem;
+	border-bottom: 1px solid transparent;
+	transition: color 0.15s linear, border-color 0.15s linear;
+}
+
+.nav a:hover,
+.nav a:focus-visible,
+.nav a[aria-current="page"] {
+	color: #fff;
+	border-bottom-color: #fff;
+}
+
+/* ── Stat strip ─────────────────────────────────────────────── */
+
+.stats {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	border-top: 1px solid var(--rule);
+	border-bottom: 1px solid var(--rule);
+}
+
+.stat {
+	padding: clamp(1.25rem, 2.5vw, 2rem) clamp(0.85rem, 1.5vw, 1.5rem);
+	border-left: 1px solid var(--rule);
+}
+
+.stat:first-child {
+	border-left: 0;
+}
+
+.stat__num {
+	display: block;
+	font-family: var(--display);
+	font-weight: 600;
+	font-size: clamp(2.5rem, 6vw, 4.75rem);
+	line-height: 1;
+	letter-spacing: -0.01em;
+	color: var(--text);
+	margin-bottom: 0.85rem;
+}
+
+/* ── Cards / rows ───────────────────────────────────────────── */
+
+.roster {
+	border-top: 1px solid var(--rule);
+}
+
+.person {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+	gap: clamp(1rem, 3vw, 2rem);
+	padding-block: clamp(1.1rem, 2.2vw, 1.6rem);
+	border-bottom: 1px solid var(--rule);
+	align-items: baseline;
+}
+
+.person__name {
+	font-family: var(--display);
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.02em;
+	font-size: clamp(1.15rem, 2vw, 1.65rem);
+	line-height: 1.1;
+	margin: 0;
+}
+
+.person__note {
+	margin: 0;
+	color: var(--muted);
+	font-size: 0.9375rem;
+}
+
+/* ── Runs (The Club) ────────────────────────────────────────── */
+
+.runs {
+	border-top: 1px solid var(--rule);
+}
+
+.run {
+	display: grid;
+	grid-template-columns: minmax(6rem, 12%) minmax(6rem, 14%) 1fr;
+	gap: clamp(1rem, 2.5vw, 2rem);
+	padding-block: clamp(1rem, 2vw, 1.5rem);
+	border-bottom: 1px solid var(--rule);
+	align-items: baseline;
+}
+
+.run__day {
+	font-family: var(--display);
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	font-size: clamp(1rem, 1.6vw, 1.25rem);
+	margin: 0;
+}
+
+.run__time {
+	font-family: var(--body);
+	font-variant-numeric: tabular-nums;
+	margin: 0;
+	color: var(--text);
+}
+
+.run__where {
+	margin: 0;
+	color: var(--muted);
+}
+
+/* ── Partners ───────────────────────────────────────────────── */
+
+.tier {
+	padding-block: clamp(1.25rem, 3vw, 2.1rem);
+	border-bottom: 1px solid var(--rule);
+}
+
+.tier:first-of-type {
+	border-top: 1px solid var(--rule);
+}
+
+.tier__head {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 1.5rem;
+	margin-bottom: 1.25rem;
+}
+
+.slots {
+	display: grid;
+	gap: 1px;
+	background: var(--rule);
+	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+
+.slots--title {
+	grid-template-columns: minmax(0, 1fr);
+}
+
+.slot {
+	background: var(--ground);
+	aspect-ratio: 16 / 7;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--muted);
+	font-family: var(--label-font);
+	font-size: 0.625rem;
+	font-weight: 300;
+	text-transform: uppercase;
+	letter-spacing: 0.24em;
+	text-align: center;
+	padding: 1rem;
+}
+
+.slots--title .slot {
+	aspect-ratio: 16 / 4;
+}
+
+/* ── Course steps (URU) ─────────────────────────────────────── */
+
+.steps {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	border: 1px solid var(--rule);
+}
+
+.step {
+	padding: clamp(1rem, 2vw, 1.6rem);
+	border-left: 1px solid var(--rule);
+}
+
+.step:first-child {
+	border-left: 0;
+}
+
+.step__num {
+	font-family: var(--display);
+	font-size: 1.25rem;
+	color: var(--accent);
+	display: block;
+	margin-bottom: 0.9rem;
+}
+
+.step__name {
+	font-family: var(--display);
+	font-weight: var(--display-weight);
+	text-transform: uppercase;
+	font-size: clamp(1.1rem, 1.9vw, 1.5rem);
+	line-height: 1;
+	margin: 0 0 0.7rem;
+}
+
+.step__body {
+	margin: 0;
+	font-size: 0.9375rem;
+	color: var(--muted);
+}
+
+/* ── Registration bands (URU) ───────────────────────────────── */
+
+.band {
+	padding-block: clamp(1.75rem, 4vw, 3rem);
+	background: var(--ground);
+}
+
+.band__inner {
+	display: grid;
+	grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr) auto;
+	gap: clamp(1.25rem, 3vw, 2.25rem);
+	align-items: center;
+}
+
+.band__detail {
+	margin: 0;
+	color: var(--text);
+	font-size: 0.9375rem;
+	line-height: 1.9;
+}
+
+.band__detail span {
+	color: var(--muted);
+}
+
+.band__time {
+	display: block;
+	margin-top: 0.75rem;
+	font-family: var(--label-font);
+	font-size: 0.6875rem;
+	font-weight: 500;
+	text-transform: uppercase;
+	letter-spacing: 0.22em;
+	color: var(--accent);
+}
+
+/* ── Facts list ─────────────────────────────────────────────── */
+
+.facts {
+	border-top: 1px solid var(--rule);
+	margin: 0;
+}
+
+.fact {
+	display: grid;
+	grid-template-columns: minmax(8rem, 20%) 1fr;
+	gap: 1.5rem;
+	padding-block: 1rem;
+	border-bottom: 1px solid var(--rule);
+	align-items: baseline;
+}
+
+.fact__val {
+	margin: 0;
+	font-size: clamp(1rem, 1.5vw, 1.1875rem);
+	color: var(--text);
+}
+
+.fact__val--big {
+	font-family: var(--display);
+	font-weight: var(--display-weight);
+	text-transform: uppercase;
+	font-size: clamp(1.2rem, 2.4vw, 1.85rem);
+	line-height: 1.05;
+}
+
+/* ── Notes / callouts ───────────────────────────────────────── */
+
+.note {
+	border-left: 1px solid var(--rule-strong);
+	padding: 0.25rem 0 0.25rem 1.5rem;
+	max-width: 70ch;
+	color: var(--muted);
+	font-size: 0.9375rem;
+	margin: clamp(1.25rem, 2.5vw, 2rem) 0 0;
+}
+
+.uru .note {
+	border-left-color: var(--accent);
+}
+
+.signup {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+	margin-top: 1.75rem;
+	max-width: 34rem;
+}
+
+.signup input {
+	flex: 1 1 14rem;
+	background: transparent;
+	border: 1px solid var(--rule-strong);
+	color: var(--text);
+	font-family: var(--body);
+	font-size: 0.9375rem;
+	padding: 1rem 1.15rem;
+}
+
+.signup input::placeholder {
+	color: var(--muted);
+}
+
+.signup input:focus-visible {
+	outline: none;
+	border-color: var(--text);
+}
+
+/* ── Steps list (Thank You) ─────────────────────────────────── */
+
+.next {
+	counter-reset: step;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	border-top: 1px solid var(--rule);
+}
+
+.next li {
+	counter-increment: step;
+	padding-block: 1.5rem;
+	border-bottom: 1px solid var(--rule);
+	display: grid;
+	grid-template-columns: 3rem 1fr;
+	gap: 1.5rem;
+	align-items: baseline;
+}
+
+.next li::before {
+	content: counter(step, decimal-leading-zero);
+	font-family: var(--display);
+	font-weight: var(--display-weight);
+	color: var(--accent);
+	font-size: 1.05rem;
+}
+
+.next h3 {
+	font-family: var(--label-font);
+	font-size: 0.8125rem;
+	font-weight: 600;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	margin: 0 0 0.4rem;
+}
+
+.next p {
+	margin: 0;
+	color: var(--muted);
+	font-size: 0.9375rem;
+}
+
+/* ── Footer ─────────────────────────────────────────────────── */
+
+.site-foot {
+	background: #0b0d0f;
+	color: #fff;
+	border-top: 1px solid rgba(255, 255, 255, 0.16);
+	padding-block: clamp(1.75rem, 3.5vw, 2.75rem);
+}
+
+.site-foot__inner {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2rem;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+
+.site-foot address {
+	font-style: normal;
+	font-size: 0.9375rem;
+	color: #a8adb2;
+	line-height: 1.75;
+}
+
+.site-foot .label {
+	color: #fff;
+	margin-bottom: 0.85rem;
+}
+
+.site-foot .textlink {
+	color: #fff;
+	border-bottom-color: rgba(255, 255, 255, 0.42);
+}
+
+/* ── Utilities ──────────────────────────────────────────────── */
+
+.mt-l {
+	margin-top: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.skip {
+	position: absolute;
+	left: -9999px;
+}
+
+.skip:focus {
+	left: var(--gutter);
+	top: 0.5rem;
+	z-index: 100;
+	background: #fff;
+	color: #0b0d0f;
+	padding: 0.75rem 1.25rem;
+	font-size: 0.75rem;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+}
+
+:focus-visible {
+	outline: 2px solid currentColor;
+	outline-offset: 3px;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+
+@media (max-width: 1000px) {
+	.steps {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+	.step:nth-child(3) {
+		border-left: 0;
+	}
+	.step:nth-child(n + 3) {
+		border-top: 1px solid var(--rule);
+	}
+	.band__inner {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (max-width: 900px) {
+	.split {
+		grid-template-columns: 1fr;
+	}
+	.stats {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.stat:nth-child(3) {
+		border-left: 0;
+	}
+	.stat:nth-child(n + 3) {
+		border-top: 1px solid var(--rule);
+	}
+	.person,
+	.run {
+		grid-template-columns: 1fr;
+		gap: 0.5rem;
+	}
+}
+
+@media (max-width: 640px) {
+	.steps {
+		grid-template-columns: 1fr;
+	}
+	.step {
+		border-left: 0;
+	}
+	.step + .step {
+		border-top: 1px solid var(--rule);
+	}
+	.fact {
+		grid-template-columns: 1fr;
+		gap: 0.4rem;
+	}
+	.site-head__inner {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.85rem;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+	* {
+		transition: none !important;
+	}
+}
+
+/* ── URU header variant (Thank You) ─────────────────────────── */
+.site-head--uru {
+	background: #17232d;
+	border-bottom-color: rgba(243, 235, 221, 0.18);
+}
+
+.site-head--uru .label {
+	color: #d94f70;
+}
+
+/* Ambassador social handle — small uppercase, spaced from credentials */
+.person__handle {
+	display: inline-block;
+	margin-top: 0.6rem;
+	font-family: var(--label-font);
+	font-size: 0.6875rem;
+	font-weight: 600;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	border-bottom-color: var(--rule-strong);
+}
+
+/* Partner tier benefit lists (real sponsorship-prospectus content) */
+.tier__benefits {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+	gap: 0.6rem 2.5rem;
+}
+
+.tier__benefits li {
+	position: relative;
+	padding-left: 1.25rem;
+	font-size: 0.9375rem;
+	color: var(--muted);
+	line-height: 1.5;
+}
+
+.tier__benefits li::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0.72em;
+	width: 0.65rem;
+	height: 1px;
+	background: var(--text);
+}
+
+/* ── Co-brand credit (HMC × LIFTR on URU GAMES pages) ───────── */
+.cobrand {
+	display: flex;
+	align-items: baseline;
+	gap: 0.85rem;
+	margin-bottom: 1.75rem;
+}
+
+.cobrand__x {
+	color: var(--muted);
+	font-size: 0.75rem;
+}
+
+.cobrand__liftr {
+	font-family: var(--body);
+	font-weight: 800;
+	font-style: italic;
+	font-size: 0.9375rem;
+	letter-spacing: 0.02em;
+	/* Lightened from LIFTR's #d0242a — that reads fine on the old
+	   cream .uru background but drops to ~3:1 contrast (fails AA)
+	   against the new Deep Ink one. */
+	color: #f15a60;
+}
+
+/* ── Registration band index + tag badges ──────────────────── */
+.band__head {
+	display: flex;
+	align-items: baseline;
+	gap: 1rem;
+	margin-bottom: 0.85rem;
+}
+
+.band__index {
+	font-family: var(--display);
+	font-size: 1rem;
+	color: var(--accent);
+}
+
+.band__tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin-top: 1rem;
+}
+
+.tag {
+	display: inline-block;
+	border: 1px solid var(--rule-strong);
+	padding: 0.3rem 0.65rem;
+	font-family: var(--label-font);
+	font-size: 0.625rem;
+	font-weight: 600;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--muted);
+}
+
+/* ── Partner CTA (mirrors .callout pattern, URU-scoped) ─────── */
+.partner-cta {
+	border: 1px solid var(--accent);
+	padding: clamp(1.5rem, 3vw, 2.5rem);
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2rem;
+	align-items: center;
+	justify-content: space-between;
+}
+
+/* ── Event cards (Events index page) ────────────────────────── */
+.event-cards {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	border-top: 1px solid var(--rule);
+	border-left: 1px solid var(--rule);
+}
+
+.event-card {
+	padding: clamp(1.75rem, 3vw, 2.5rem);
+	border-right: 1px solid var(--rule);
+	border-bottom: 1px solid var(--rule);
+	display: flex;
+	flex-direction: column;
+	gap: 1.1rem;
+}
+
+.event-card__meta {
+	display: flex;
+	gap: 1.25rem;
+	flex-wrap: wrap;
+}
+
+.event-card__name {
+	font-family: var(--display);
+	font-weight: var(--display-weight);
+	text-transform: uppercase;
+	font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+	line-height: 1.05;
+	margin: 0;
+}
+
+.event-card__body {
+	margin: 0;
+	color: var(--muted);
+	font-size: 0.9375rem;
+	line-height: 1.65;
+}
+
+.event-card__spacer {
+	flex: 1 1 auto;
+}
+
+.event-card__link {
+	font-family: var(--label-font);
+	font-size: 0.6875rem;
+	font-weight: 600;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: var(--text);
+	border-bottom: 1px solid var(--rule-strong);
+	align-self: flex-start;
+	padding-bottom: 1px;
+	transition: border-color 0.15s linear;
+}
+
+.event-card__link:hover,
+.event-card__link:focus-visible {
+	border-bottom-color: var(--text);
+}
+
+/* Home stats bar — 3 columns (blueprint's condensed stat strip) */
+.stats--3 {
+	grid-template-columns: repeat(3, 1fr);
+}
+
+/* ── URU Games entry gate — local-riddle unlock ──────────────
+   Deliberately styled in Identity A (near-black/white) rather
+   than the .uru scope: it's the "dark terminal" the brief
+   asked for, kept as its own near-black shade even now that
+   .uru itself is dark too — the values still read as a small
+   step up, not a re-tread. Neon glitch on unlock is a
+   transient filter effect only — not a new permanent hue. ── */
+
+.uru-gate {
+	position: fixed;
+	inset: 0;
+	z-index: 999;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 1.5rem;
+	background: var(--ground);
+	color: var(--text);
+	text-align: center;
+	transition: opacity 0.6s ease;
+}
+
+.uru-gate.is-fading {
+	opacity: 0;
+	pointer-events: none;
+}
+
+body.uru-gate-active {
+	overflow: hidden;
+}
+
+.uru-gate__panel {
+	max-width: 34rem;
+}
+
+.uru-gate__title {
+	font-family: var(--display);
+	font-weight: var(--display-weight);
+	text-transform: uppercase;
+	letter-spacing: 0.02em;
+	font-size: clamp(1.5rem, 4vw, 2.5rem);
+	line-height: 1.15;
+	margin: 0 0 1.5rem;
+}
+
+.uru-gate__prompt {
+	font-weight: 600;
+	margin: 0 0 1rem;
+}
+
+.uru-gate__riddle {
+	font-style: italic;
+	color: var(--muted);
+	line-height: 1.6;
+	margin: 0 0 2rem;
+}
+
+.uru-gate__choices {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	margin: 0 0 1rem;
+}
+
+.uru-gate__choice {
+	font: inherit;
+	padding: 0.85rem 1.25rem;
+	border: 1px solid var(--rule);
+	background: transparent;
+	color: var(--text);
+	cursor: pointer;
+	transition:
+		border-color 0.2s ease,
+		transform 0.2s ease;
+}
+
+.uru-gate__choice:hover,
+.uru-gate__choice:focus-visible {
+	border-color: var(--rule-strong);
+}
+
+.uru-gate__choice.is-wrong {
+	animation: uru-gate-shake 0.4s ease;
+	border-color: #d94f4f;
+}
+
+.uru-gate__feedback {
+	min-height: 1.2em;
+	font-size: 0.9rem;
+	color: var(--muted);
+}
+
+.uru-gate__result {
+	font-family: var(--display);
+	text-transform: uppercase;
+	font-size: clamp(1.5rem, 4vw, 2.25rem);
+	line-height: 1.2;
+	margin: 0;
+}
+
+.uru-gate.is-unlocking .uru-gate__panel {
+	animation: uru-gate-glitch 0.5s steps(2, end);
+}
+
+@keyframes uru-gate-shake {
+	0%,
+	100% {
+		transform: translateX(0);
+	}
+	25% {
+		transform: translateX(-6px);
+	}
+	75% {
+		transform: translateX(6px);
+	}
+}
+
+@keyframes uru-gate-glitch {
+	0% {
+		transform: translate(0, 0);
+		filter: hue-rotate(0deg);
+	}
+	20% {
+		transform: translate(-3px, 2px);
+		filter: hue-rotate(30deg);
+	}
+	40% {
+		transform: translate(3px, -2px);
+		filter: hue-rotate(-20deg);
+	}
+	60% {
+		transform: translate(-2px, -2px);
+		filter: hue-rotate(15deg);
+	}
+	80% {
+		transform: translate(2px, 2px);
+		filter: hue-rotate(-10deg);
+	}
+	100% {
+		transform: translate(0, 0);
+		filter: hue-rotate(0deg);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.uru-gate,
+	.uru-gate__choice,
+	.uru-gate.is-unlocking .uru-gate__panel {
+		animation: none !important;
+		transition: none !important;
+	}
+}
