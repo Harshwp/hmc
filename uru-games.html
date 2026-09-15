@@ -131,6 +131,14 @@
 							A hybrid endurance event.
 						</p>
 
+						<p class="mt-l">
+							<a
+								class="btn js-register"
+								href="https://payments.cashfree.com/forms?code=urugames_openmen"
+								>Register for URU Games →</a
+							>
+						</p>
+
 						<div class="split mt-l">
 							<h2 class="display">Not your average<br />hybrid race.</h2>
 							<div class="prose">
@@ -138,12 +146,12 @@
 									Boom. You made it to URU Games.
 								</p>
 								<p>
-									Look — if you think we're just another group of everyday
+									Look, if you think we're just another group of everyday
 									people messing around with a hybrid race format... you're
 									probably right. And we wear that proudly.
 								</p>
 								<p>
-									No serious-faced egos here — just an outdoor hybrid
+									No serious-faced egos here. Just an outdoor hybrid
 									playground forged out of pure love, raw grit, and local
 									spirit. Welcome to our world.
 								</p>
@@ -304,10 +312,8 @@
 							</div>
 						</div>
 						<a
-							class="btn"
+							class="btn js-register"
 							href="https://payments.cashfree.com/forms?code=urugames_openmen"
-							target="_blank"
-							rel="noopener"
 							>Register</a
 						>
 					</div>
@@ -337,10 +343,8 @@
 							</div>
 						</div>
 						<a
-							class="btn"
+							class="btn js-register"
 							href="https://payments.cashfree.com/forms?code=urugames_openmen"
-							target="_blank"
-							rel="noopener"
 							>Register</a
 						>
 					</div>
@@ -370,10 +374,8 @@
 							</div>
 						</div>
 						<a
-							class="btn"
+							class="btn js-register"
 							href="https://payments.cashfree.com/forms?code=urugames_openmen"
-							target="_blank"
-							rel="noopener"
 							>Register</a
 						>
 					</div>
@@ -403,10 +405,8 @@
 							</div>
 						</div>
 						<a
-							class="btn"
+							class="btn js-register"
 							href="https://payments.cashfree.com/forms?code=urugames_openmen"
-							target="_blank"
-							rel="noopener"
 							>Register</a
 						>
 					</div>
@@ -423,6 +423,39 @@
 						</p>
 					</div>
 				</section>
+
+				<!-- ── Registration modal — agree to Terms before checkout ──
+				     Intercepts every .js-register click; opens the Cashfree
+				     link (in a new tab) only once the checkbox is ticked. ── -->
+				<div class="reg-modal" id="reg-modal" role="dialog" aria-modal="true" aria-labelledby="reg-modal-title" hidden>
+					<div class="reg-modal__panel">
+						<button type="button" class="reg-modal__close" id="reg-modal-close" aria-label="Close">×</button>
+						<h2 id="reg-modal-title" class="reg-modal__title display">
+							One last thing
+						</h2>
+						<p class="reg-modal__body">
+							Uru Games is a physically demanding hybrid event. Please read
+							the athlete terms before you continue to payment.
+						</p>
+						<label class="reg-modal__check">
+							<input type="checkbox" id="reg-modal-agree" />
+							<span>
+								I have read and agree to the
+								<a class="textlink" href="terms.html" target="_blank" rel="noopener"
+									>Uru Games Athlete Terms &amp; Conditions</a
+								>.
+							</span>
+						</label>
+						<button
+							type="button"
+							class="btn btn--block reg-modal__continue"
+							id="reg-modal-continue"
+							disabled
+						>
+							Continue to payment
+						</button>
+					</div>
+				</div>
 			</div>
 		</main>
 
@@ -431,9 +464,9 @@
 				<div>
 					<p class="label">Hybrid Miles Club</p>
 					<address>
-						#387, 17th C Main, 15th Cross<br />
-						4th Sector, HSR Layout<br />
-						Bangalore 560102
+						Building No. 1831, Shop No. 9, 1st Floor<br />
+						60 Feet Road, AECS Layout A Block<br />
+						Singasandra, Bangalore 560068
 					</address>
 				</div>
 				<div>
@@ -443,7 +476,7 @@
 						<a class="textlink" href="mailto:hybridmilesclub@gmail.com"
 							>hybridmilesclub@gmail.com</a
 						><br />
-						<a class="textlink" href="tel:+919945455559">+91 99454 55559</a>
+						<a class="textlink" href="tel:+918951833224">+91 89518 33224</a>
 					</address>
 				</div>
 				<div>
@@ -457,10 +490,14 @@
 						>
 					</address>
 				</div>
-				<p class="label">© 2026 Hybrid Miles Club · Namma Bengaluru</p>
+				<p class="label">
+					© 2026 Hybrid Miles Club · Namma Bengaluru ·
+					<a class="textlink" href="terms.html">Terms &amp; Conditions</a>
+				</p>
 			</div>
 		</footer>
 		<script src="uru-gate.js" defer></script>
+		<script src="register-modal.js" defer></script>
 		<script src="reveal.js" defer></script>
 		<script src="parallax.js" defer></script>
 	</body>
